@@ -1,6 +1,8 @@
-#!/bin/zsh
+#!/bin/bash
 
-set -e # Quit on failure
-mv _vimrc ~/.vimrc
-cp -R ./vim ~
-vim +PluginInstall +qall #
+#set -e # Quit on failure
+
+cp ./_vimrc ~/.vimrc
+cp -r .vim/ ~/.vim/
+#vim +PluginInstall +qall #
+vim -c '<CR>' -c 'PluginInstall' -c 'qa!'
