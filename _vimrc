@@ -4,7 +4,7 @@ filetype off                  " required
 " modify file in users/vim73/_vimrc"
 " on windows replace users with username
 " PATHS
-:cd programming/
+" :cd programming/
 " TAB settings
 	set tabstop=4
 	set shiftwidth=4
