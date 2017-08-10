@@ -18,6 +18,7 @@ filetype off                  " required
 	map <Left> :bprevious<CR>
 	map <Right> :bnext<CR>
 	map § :bnext<CR>
+    map ° :bprevious<CR>
 	" backspace
 	set bs=2
 	" disable arrows
@@ -31,11 +32,9 @@ filetype off                  " required
 	noremap! <Right> <Esc>
     " Leader key is , insted of \
     let mapleader = ','
-    
 " PLUGINS
-	" source plugin/matchit.vim 
+	" source plugin/matchit.vim
 	" filetype plugin on
-
     " set the runtime path to include Vundle and initialize
     set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#begin()
@@ -52,8 +51,15 @@ filetype off                  " required
     Plugin 'drmikehenry/vim-fontsize'
     Plugin 'majutsushi/tagbar'
     Plugin 'ctrlpvim/ctrlp.vim'
+    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+    Plugin 'xolox/vim-misc' " For vim-session
+    Plugin 'xolox/vim-session'
+    Plugin 'xolox/vim-easytags' " Automatic ctags
     "Plugin 'Yggdroot/indentLine'
-    
+    Plugin 'pangloss/vim-javascript' " for vim-jsx
+    Plugin 'mxw/vim-jsx'
+    Plugin 'prettier/vim-prettier' " Prettier, run with :Prettier
+
     " The following are examples of different formats supported.
     " Keep Plugin commands between vundle#begin/end.
     " plugin from http://vim-scripts.org/vim/scripts.html
@@ -75,14 +81,23 @@ filetype off                  " required
 "# PLUGIN configs general
     let g:airline#extensions#tabline#enabled = 1
 	let g:rainbow_active = 1 
+    let g:session_autosave = 'no' " disable session annoyance
+    let g:jsx_ext_required = 0 " alow jsx syntax hilight in .js files
 " PLUGIN configs NerdTree
     " ctrl-n opens tree
-    map <C-n> :NERDTreeToggle<CR>
+    map <Leader>n :NERDTreeToggle<CR> " <leader>n open nerdtree
     " If only window is tree. Quit.
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    let g:NERDTreeChDirMode=2 " chdir with C
+" CTRLP
+    let g:ctrlp_working_path_mode = 'rw' " Combined with nerdtreechdirmode=2
+    "let g:ctrlp_working_path_mode = 'ra'
+    set wildignore+=*/tmp/*,*.so,*.swp,*.zip 
+
 " CTAGS
     " look in local dir for tags
-    set tags=tags;/
+    set tags=./tags;
+    let g:easytags_dynamic_files = 1
     " hide tagbar php variables
     let g:tagbar_type_php  = {
     \ 'ctagstype' : 'php',
