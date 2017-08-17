@@ -19,6 +19,7 @@ filetype off                  " required
 	map <Right> :bnext<CR>
 	map § :bnext<CR>
     map ° :bprevious<CR>
+    set mouse=a " enable mouse in osx
 	" backspace
 	set bs=2
 	" disable arrows
@@ -32,6 +33,11 @@ filetype off                  " required
 	noremap! <Right> <Esc>
     " Leader key is , insted of \
     let mapleader = ','
+    " Other shortcuts
+    nnoremap <Leader>h :set hlsearch!<CR>
+    "nnoremap <Leader>c :Bclose<CR>
+    "nmap <leader>c :bp <BAR> bd #<CR>
+    nmap <leader>c :bn<cr>:bd #<cr>:bp<cr>
 " PLUGINS
 	" source plugin/matchit.vim
 	" filetype plugin on
@@ -59,6 +65,7 @@ filetype off                  " required
     Plugin 'pangloss/vim-javascript' " for vim-jsx
     Plugin 'mxw/vim-jsx'
     Plugin 'prettier/vim-prettier' " Prettier, run with :Prettier
+    Plugin 'vim-syntastic/syntastic' " eslint etc.
 
     " The following are examples of different formats supported.
     " Keep Plugin commands between vundle#begin/end.
@@ -83,11 +90,28 @@ filetype off                  " required
 	let g:rainbow_active = 1 
     let g:session_autosave = 'no' " disable session annoyance
     let g:jsx_ext_required = 0 " alow jsx syntax hilight in .js files
+    let g:airline_detect_whitespace=0 " Disable whitespae wrning in airline
+    let g:session_autoload = 'no' "  Vim-session don'w aurtoreload
 " PLUGIN configs NerdTree
     " ctrl-n opens tree
     map <Leader>n :NERDTreeToggle<CR> " <leader>n open nerdtree
+    map <leader>r :NERDTreeFind<cr> " <leader>r find file in tree
     " If only window is tree. Quit.
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+    "autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
+    " Close all open buffers on entering a window if the only
+    " buffer that's left is the NERDTree buffer
+    function! s:CloseIfOnlyNerdTreeLeft()
+      if exists("t:NERDTreeBufName")
+        if bufwinnr(t:NERDTreeBufName) != -1
+          if winnr("$") == 1
+            q
+          endif
+        endif
+      endif
+    endfunction
     let g:NERDTreeChDirMode=2 " chdir with C
 " CTRLP
     let g:ctrlp_working_path_mode = 'rw' " Combined with nerdtreechdirmode=2
@@ -126,7 +150,12 @@ filetype off                  " required
 	"set list
 	"set listchars=tab:.,trail:.,extends:#,nbsp:.
     set listchars=tab:▸\ ,eol:¬
-    
+"   LINTING
+    let g:syntastic_javascript_checkers=['eslint']
+    "let g:syntastic_auto_jump = 1
+    "let g:syntastic_always_populate_loc_list = 1
+    "let g:syntastic_auto_loc_list = 1
+    "let g:syntastic_check_on_wq = 0
 " COMMANDS
 	:command Python set tabstop=2|set shiftwidth=2|set nu|set et
 	:command Fuck e ~/.vimrc
@@ -138,6 +167,7 @@ filetype off                  " required
     nnoremap <leader>t :TagbarToggle<CR>
     " <leader>g go to def
     nnoremap <leader>g <C-]>
+    nnoremap <leader>l :! yarn run check<CR>
 " SETTINGS
 	"Incasesensitive search
     set ignorecase
