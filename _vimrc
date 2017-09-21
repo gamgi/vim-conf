@@ -6,9 +6,9 @@ filetype off                  " required
 " PATHS
 " :cd programming/
 " TAB settings
-	set tabstop=4
-	set shiftwidth=4
-	set softtabstop=4
+	set tabstop=2
+	set shiftwidth=2
+	set softtabstop=2
 	set autoindent
 	set hidden
 	set expandtab
@@ -38,6 +38,7 @@ filetype off                  " required
     "nnoremap <Leader>c :Bclose<CR>
     "nmap <leader>c :bp <BAR> bd #<CR>
     nmap <leader>c :bn<cr>:bd #<cr>:bp<cr>
+    nmap <leader>f :NERDTreeFind<CR>
 " PLUGINS
 	" source plugin/matchit.vim
 	" filetype plugin on
@@ -65,7 +66,7 @@ filetype off                  " required
     Plugin 'pangloss/vim-javascript' " for vim-jsx
     Plugin 'mxw/vim-jsx'
     Plugin 'prettier/vim-prettier' " Prettier, run with :Prettier
-    Plugin 'vim-syntastic/syntastic' " eslint etc.
+    Plugin 'vim-syntastic/syntastic' " eslint etc.'
 
     " The following are examples of different formats supported.
     " Keep Plugin commands between vundle#begin/end.
@@ -92,6 +93,7 @@ filetype off                  " required
     let g:jsx_ext_required = 0 " alow jsx syntax hilight in .js files
     let g:airline_detect_whitespace=0 " Disable whitespae wrning in airline
     let g:session_autoload = 'no' "  Vim-session don'w aurtoreload
+" PLUGIN vim-fontsize
 " PLUGIN configs NerdTree
     " ctrl-n opens tree
     map <Leader>n :NERDTreeToggle<CR> " <leader>n open nerdtree
