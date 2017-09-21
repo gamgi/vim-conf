@@ -93,6 +93,7 @@ filetype off                  " required
     let g:jsx_ext_required = 0 " alow jsx syntax hilight in .js files
     let g:airline_detect_whitespace=0 " Disable whitespae wrning in airline
     let g:session_autoload = 'no' "  Vim-session don'w aurtoreload
+    autocmd FileType javascript.jsx runtime! ftplugin/html/sparkup.vim " spakrup to work in js
 " PLUGIN vim-fontsize
 " PLUGIN configs NerdTree
     " ctrl-n opens tree
