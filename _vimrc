@@ -67,7 +67,8 @@ filetype off                  " required
     Plugin 'mxw/vim-jsx'
     Plugin 'prettier/vim-prettier' " Prettier, run with :Prettier
     Plugin 'vim-syntastic/syntastic' " eslint etc.'
-
+    Plugin 'tell-k/vim-autopep8' " :Autopep8
+    Plugin 'airblade/vim-gitgutter' " git diff in gutter
     " The following are examples of different formats supported.
     " Keep Plugin commands between vundle#begin/end.
     " plugin from http://vim-scripts.org/vim/scripts.html
